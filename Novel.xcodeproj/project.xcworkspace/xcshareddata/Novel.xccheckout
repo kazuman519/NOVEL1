@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2A1F5515-9FC8-4AFE-BD65-C01C88E3DDFF</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Novel</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>ADE3AB16-E77E-47E4-8065-38E255D503BE</key>
+		<string>ssh://github.com/kazuman519/NOVEL.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Novel.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>ADE3AB16-E77E-47E4-8065-38E255D503BE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/kazuman519/NOVEL.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>ADE3AB16-E77E-47E4-8065-38E255D503BE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>ADE3AB16-E77E-47E4-8065-38E255D503BE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Novel</string>
+		</dict>
+	</array>
+</dict>
+</plist>
