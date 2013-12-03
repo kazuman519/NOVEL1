@@ -133,7 +133,7 @@ enum {
                 else{
                     label.string = [showText_ substringWithRange:NSMakeRange(i*maxLineLength_, maxLineLength_)];
                 }
-                NSLog(@"faaa");
+                NSLog(@"faaafawefeafaw");
             }
         }
         else if (progressTime_ >= delayTime_) {
