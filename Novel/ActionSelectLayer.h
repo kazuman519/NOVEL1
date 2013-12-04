@@ -12,14 +12,17 @@
 
 @interface ActionSelectLayer : CCLayer {
     CGSize winSize_;
+    CGPoint zeroPos_;
     GameData *gameData_;
     
     CCLabelTTF* dayLabel_;
-    CCMenuItemFont* talkBtn_;
-    CCMenuItemFont* itemBtn_;
-    CCMenuItemFont* dataBtn_;
-    CCMenuItemFont* shopBtn_;
-    CCMenuItemFont* systemBtn_;
+    CCSprite* bgSprite_;
+    CCSprite* timeSprite_;
+    CCMenuItemSprite* talkBtn_;
+    CCMenuItemSprite* itemBtn_;
+    CCMenuItemSprite* dataBtn_;
+    CCMenuItemSprite* shopBtn_;
+    CCMenuItemSprite* systemBtn_;
     
     CGPoint dayLabelPos_;
     CGPoint talkBtnPos_;
@@ -29,6 +32,7 @@
     CGPoint systemBtnPos_;
     
     float day_;
+    int   time_;
 }
 
 @property BOOL isShowTalk;

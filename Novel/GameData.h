@@ -22,6 +22,7 @@
 
 -(void)newData;
 -(float)getDay;
+-(int)getTime;
 -(NSString*)getCharNameAppointID:(int)charID;
 -(NSMutableArray*)getAppearanceCharName;
 -(void)nextTime;

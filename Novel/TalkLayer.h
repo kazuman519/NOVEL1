@@ -8,27 +8,33 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "GameData.h"
 
 @interface TalkLayer : CCLayer {
     CGSize winSize_;
+    GameData* gameData_;
+    
+    CCMenuItemSprite* menuBtn_;
     CCSprite* textWindow_;
+    CCSprite* penSprite_;
     CCLabelTTF* charNameLabel_;
+    CGPoint penPos_;
     
     // 設定関連
-    int maxLineNum_;
-    int maxLineLength_;
-    int nowTextLength_;
-    int lineDuring_;
-    int fontSize_;
-    float delayTime_;
-    float progressTime_;
-    NSString *showText_;
+    int maxLineNum_;    //１行の最大文字数
+    int maxLineLength_; //最大行数
+    int nowTextLength_; //現在表示しているテキストの長さ
+    int lineDuring_;    //行の間隔
+    int fontSize_;      //文字サイズ
+    float delayTime_;   //文字の表示スピード
+    float progressTime_;//現在表示にかかっている時間
+    NSString *showText_;//現在表示させているテキスト
     
-    BOOL isShowText_;
-    BOOL isSkip_;
+    BOOL isShowText_;   //テキストが表示されきったかの確認
+    BOOL isSkip_;       //スキップがされたかの確認
     
     // なんか
-    int textNum;
+    int textNum;        //現在表示させたテキストのナンバー
 }
 
 @property (nonatomic,retain)NSMutableArray* textArray;

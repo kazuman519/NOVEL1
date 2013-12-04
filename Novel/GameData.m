@@ -114,6 +114,12 @@ static GameData* _gameDataInstance = nil;
     
     return progressDay;
 }
+-(int)getTime{
+    float day = [self getDay];
+    int time = (int)(day * 10) % 10;
+    
+    return time;
+}
 -(NSString *)getCharNameAppointID:(int)charID{
     NSString* charName;
     
