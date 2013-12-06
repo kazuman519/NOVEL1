@@ -39,4 +39,5 @@
 
 @property (nonatomic,retain)NSMutableArray* textArray;
 @property (nonatomic,retain)NSMutableArray* labelArray;
+@property (nonatomic,retain)NSMutableArray* charArray;
 @end

@@ -7,11 +7,14 @@
 //
 
 #import "TalkLayer.h"
+#import "MenuScene.h"
 
 
 @implementation TalkLayer
 enum {
     OBJECT_NULL,
+    OBJECT_BACKGROUND,
+    OBJECT_CHARACTER,
     OBJECT_TEXT_WINDOW,
     OBJECT_LINES_LABEL,
     OBJECT_CHAR_LABEL,
@@ -63,6 +66,7 @@ enum {
     
     self.textArray = [NSMutableArray array];
     self.labelArray = [NSMutableArray array];
+    self.charArray = [NSMutableArray array];
     
     [self.textArray addObject:@"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろらりるれろ１２３４５６７８９０"];
     [self.textArray addObject:@"なんやててあ"];
@@ -74,6 +78,7 @@ enum {
     // メニューボタン
     menuBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"menuBtn.png"] selectedSprite:[CCSprite spriteWithFile:@"menuBtn.png"] block:^(id sender) {
         NSLog(@"MENU");
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MenuScene node]]];
     }];
     menuBtn_.position = ccp(winSize_.width/2 + winSize_.height*0.63, winSize_.height - menuBtn_.contentSize.height/2);
     
@@ -109,6 +114,11 @@ enum {
         [self.labelArray addObject:textLabel];
         [self addChild:textLabel z:OBJECT_LINES_LABEL tag:OBJECT_LINES_LABEL];
     }
+    
+    // キャラクター
+    CCSprite* charSprite = [CCSprite spriteWithFile:@"1_1.png"];
+    charSprite.position = ccp(winSize_.width/2, winSize_.height*0.2);
+    [self addChild:charSprite z:OBJECT_CHARACTER tag:OBJECT_CHARACTER];
 }
 // ペンのアクション
 -(void)jumpPen{
@@ -128,7 +138,6 @@ enum {
     }
     nowTextLength_ = 0;
     progressTime_ = 0;
-    isShowText_ = NO;
     isSkip_ = NO;
     textNum++;
     [self stopPen];
@@ -174,6 +183,7 @@ enum {
         
         if (nowTextLength_ == showText_.length) {
             NSLog(@"END!!");
+            isShowText_ = NO;
             [self jumpPen];
         }
     }
@@ -194,12 +204,14 @@ enum {
     CGPoint location = [[CCDirector sharedDirector] convertToGL:touchLocation];
     
     if (CGRectContainsPoint(textWindow_.boundingBox, location)) {
-        NSLog(@"NEXT");
-        [self nextText];
-    }
-    else{
-        NSLog(@"SKIP");
-        isSkip_ = YES;
+        if (!isShowText_) {
+            NSLog(@"NEXT");
+            [self nextText];
+        }
+        else{
+            NSLog(@"SKIP");
+            isSkip_ = YES;
+        }
     }
     return isBlock;
 }
