@@ -15,8 +15,17 @@
 }
 
 @property (nonatomic, retain) NSString *databasePath;
+
+//setTextをしていないととれない
 @property (nonatomic, retain) NSMutableArray *textArray;
 @property (nonatomic, retain) NSMutableArray *charNameArray;
+@property (nonatomic, retain) NSMutableArray *inCharArray;
+@property (nonatomic, retain) NSMutableArray *outCharArray;
+@property (nonatomic, retain) NSMutableArray *changeBgArray;
+@property (nonatomic, retain) NSMutableArray *winEfeArray;
+@property (nonatomic, retain) NSMutableArray *charGraArray;
+
+
 
 +(GameData*)getInstance;
 
@@ -25,5 +34,6 @@
 -(int)getTime;
 -(NSString*)getCharNameAppointID:(int)charID;
 -(NSMutableArray*)getAppearanceCharName;
+-(void)setTextAppontCharID:(int)charID;
 -(void)nextTime;
 @end

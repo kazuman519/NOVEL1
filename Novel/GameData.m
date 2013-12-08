@@ -28,6 +28,11 @@ static GameData* _gameDataInstance = nil;
         // 初期化
         self.textArray = [NSMutableArray array];
         self.charNameArray = [NSMutableArray array];
+        self.inCharArray = [NSMutableArray array];
+        self.outCharArray= [NSMutableArray array];
+        self.changeBgArray = [NSMutableArray array];
+        self.winEfeArray = [NSMutableArray array];
+        self.charGraArray = [NSMutableArray array];
         
         //データベースの選択
         databaseName_ = @"novelDB.sqlite";
@@ -165,6 +170,46 @@ static GameData* _gameDataInstance = nil;
     }
     
     return nameArray;
+}
+-(void)setTextAppontCharID:(int)charID{
+    [self.textArray removeAllObjects];
+    [self.charNameArray removeAllObjects];
+    [self.inCharArray removeAllObjects];
+    [self.outCharArray removeAllObjects];
+    [self.changeBgArray removeAllObjects];
+    [self.winEfeArray removeAllObjects];
+    [self.charGraArray removeAllObjects];
+    
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    //クエリ文を指定
+    NSString *select_query = [NSString stringWithFormat:@"SELECT * FROM text WHERE charID=%d AND part = %d",charID,1];
+    [db beginTransaction];
+    
+    FMResultSet *rs = [db executeQuery:select_query];
+    while([rs next]) {
+        [self.textArray addObject:[rs stringForColumn:@"text"]];
+        NSString* name = [rs stringForColumn:@"name"];
+        if (name == Nil) {
+            NSLog(nil);
+            name = @" ";
+        }else{
+            name = [rs stringForColumn:@"name"];
+        }
+        [self.charNameArray addObject:name];
+        NSNumber* number = [NSNumber numberWithFloat:[rs doubleForColumn:@"inChar"]];
+        [self.inCharArray addObject:name];
+        NSLog(@"inchar%@   count:%d",number,self.winEfeArray.count);
+        [self.outCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"outCharID"]]];
+        [self.changeBgArray addObject:[rs stringForColumn:@"text"]];
+        [self.winEfeArray addObject:[rs stringForColumn:@"text"]];
+        [self.charGraArray addObject:[rs stringForColumn:@"text"]];
+    }
+    for (NSNumber *number in self.inCharArray){
+        NSLog(@"feafaenumber %@",number);
+    }
+    //Databaseを閉じる
+    [db close];
 }
 -(void)nextTime{
     [self getAppearanceCharName];

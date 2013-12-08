@@ -159,7 +159,6 @@
 		A4D99D0B184767A200204D2C /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D99D0A184767A200204D2C /* MenuScene.m */; };
 		A4D99D0E1847686600204D2C /* ShopLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D99D0D1847686600204D2C /* ShopLayer.m */; };
 		A4D99D11184796C300204D2C /* ItemLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D99D10184796C200204D2C /* ItemLayer.m */; };
-		A4D99D15184DD80E00204D2C /* novelDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = A4D99D14184DD80E00204D2C /* novelDB.sqlite */; };
 		A4D99D1F184EC88200204D2C /* dataBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D99D17184EC88200204D2C /* dataBtn.png */; };
 		A4D99D21184EC88200204D2C /* shopBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D99D19184EC88200204D2C /* shopBtn.png */; };
 		A4D99D22184EC88200204D2C /* systemBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D99D1A184EC88200204D2C /* systemBtn.png */; };
@@ -174,6 +173,8 @@
 		A4D99D33184F347700204D2C /* textWindow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D99D30184F347700204D2C /* textWindow.png */; };
 		A4D99D6C1851981800204D2C /* 1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D99D6A1851981800204D2C /* 1_1.png */; };
 		A4D99D6D1851981800204D2C /* 1_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D99D6B1851981800204D2C /* 1_2.png */; };
+		A4F0282518547B4D005FC449 /* novelDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = A4F0282418547B4D005FC449 /* novelDB.sqlite */; };
+		A4F0282718548002005FC449 /* bg1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = A4F0282618548002005FC449 /* bg1.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -493,7 +494,6 @@
 		A4D99D0D1847686600204D2C /* ShopLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopLayer.m; sourceTree = "<group>"; };
 		A4D99D0F184796C200204D2C /* ItemLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemLayer.h; sourceTree = "<group>"; };
 		A4D99D10184796C200204D2C /* ItemLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemLayer.m; sourceTree = "<group>"; };
-		A4D99D14184DD80E00204D2C /* novelDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = novelDB.sqlite; sourceTree = "<group>"; };
 		A4D99D17184EC88200204D2C /* dataBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dataBtn.png; sourceTree = "<group>"; };
 		A4D99D19184EC88200204D2C /* shopBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopBtn.png; sourceTree = "<group>"; };
 		A4D99D1A184EC88200204D2C /* systemBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = systemBtn.png; sourceTree = "<group>"; };
@@ -508,6 +508,8 @@
 		A4D99D30184F347700204D2C /* textWindow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textWindow.png; sourceTree = "<group>"; };
 		A4D99D6A1851981800204D2C /* 1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_1.png; sourceTree = "<group>"; };
 		A4D99D6B1851981800204D2C /* 1_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_2.png; sourceTree = "<group>"; };
+		A4F0282418547B4D005FC449 /* novelDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = novelDB.sqlite; sourceTree = "<group>"; };
+		A4F0282618548002005FC449 /* bg1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg1.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -533,6 +535,8 @@
 		A480A40D182981C300BBC072 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A4D99D2B184F1E7700204D2C /* classBg.png */,
+				A4F0282618548002005FC449 /* bg1.JPG */,
 				A4D99D68185197D600204D2C /* Characters */,
 				A4D99D2D184F346300204D2C /* Talk */,
 				A4D99D16184EC87000204D2C /* ActionSelect */,
@@ -603,28 +607,12 @@
 				A4C645611815362200E9DD3A /* IntroLayer.m */,
 				A4810085183847CB006D1599 /* TitleLayer.h */,
 				A4810086183847CB006D1599 /* TitleLayer.m */,
-				A4D99D09184767A200204D2C /* MenuScene.h */,
-				A4D99D0A184767A200204D2C /* MenuScene.m */,
-				A4D99CF11845914A00204D2C /* ActionSelectLayer.h */,
-				A4D99CF21845914A00204D2C /* ActionSelectLayer.m */,
-				A4D99CF71845919000204D2C /* CharSelectLayer.h */,
-				A4D99CF81845919100204D2C /* CharSelectLayer.m */,
-				A4D99CFA1845924900204D2C /* TalkLayer.h */,
-				A4D99CFB1845924900204D2C /* TalkLayer.m */,
-				A4D99D0F184796C200204D2C /* ItemLayer.h */,
-				A4D99D10184796C200204D2C /* ItemLayer.m */,
-				A4D99CFD184596C800204D2C /* DataLayer.h */,
-				A4D99CFE184596C800204D2C /* DataLayer.m */,
+				A4F0282018545C9B005FC449 /* Menu */,
 				A4D99D061847033E00204D2C /* ArchiveLayer.h */,
 				A4D99D071847033E00204D2C /* ArchiveLayer.m */,
-				A4D99D0C1847686600204D2C /* ShopLayer.h */,
-				A4D99D0D1847686600204D2C /* ShopLayer.m */,
-				A4D99D00184596DF00204D2C /* SystemLayer.h */,
-				A4D99D01184596DF00204D2C /* SystemLayer.m */,
 				A4D99D031845972C00204D2C /* HelpLayer.h */,
 				A4D99D041845972C00204D2C /* HelpLayer.m */,
 				A4C14C5D181776840000CF3D /* GameData.h */,
-				A4C14C5E181776840000CF3D /* GameData.m */,
 				A481008218321A71006D1599 /* TextLayer.h */,
 				A481008318321A71006D1599 /* TextLayer.m */,
 				A4C6456818164E8700E9DD3A /* NovelLayer.h */,
@@ -639,7 +627,7 @@
 		A4C643CD1815362000E9DD3A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A4D99D14184DD80E00204D2C /* novelDB.sqlite */,
+				A4F0282418547B4D005FC449 /* novelDB.sqlite */,
 				A4C643CE1815362000E9DD3A /* Default.png */,
 				A4C643D01815362000E9DD3A /* Default@2x.png */,
 				A4C643D21815362000E9DD3A /* Default-568h@2x.png */,
@@ -1019,7 +1007,6 @@
 		A4D99D16184EC87000204D2C /* ActionSelect */ = {
 			isa = PBXGroup;
 			children = (
-				A4D99D2B184F1E7700204D2C /* classBg.png */,
 				A4D99D17184EC88200204D2C /* dataBtn.png */,
 				A4D99D19184EC88200204D2C /* shopBtn.png */,
 				A4D99D27184EC9CF00204D2C /* itemBtn.png */,
@@ -1057,6 +1044,38 @@
 				A4D99D6B1851981800204D2C /* 1_2.png */,
 			);
 			name = "ジョージ";
+			sourceTree = "<group>";
+		};
+		A4F0282018545C9B005FC449 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				A4D99D09184767A200204D2C /* MenuScene.h */,
+				A4D99D0A184767A200204D2C /* MenuScene.m */,
+				A4F0282118545CB1005FC449 /* Select */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		A4F0282118545CB1005FC449 /* Select */ = {
+			isa = PBXGroup;
+			children = (
+				A4D99CF11845914A00204D2C /* ActionSelectLayer.h */,
+				A4D99CF21845914A00204D2C /* ActionSelectLayer.m */,
+				A4D99CF71845919000204D2C /* CharSelectLayer.h */,
+				A4D99CF81845919100204D2C /* CharSelectLayer.m */,
+				A4D99CFA1845924900204D2C /* TalkLayer.h */,
+				A4D99CFB1845924900204D2C /* TalkLayer.m */,
+				A4C14C5E181776840000CF3D /* GameData.m */,
+				A4D99D0F184796C200204D2C /* ItemLayer.h */,
+				A4D99D10184796C200204D2C /* ItemLayer.m */,
+				A4D99CFD184596C800204D2C /* DataLayer.h */,
+				A4D99CFE184596C800204D2C /* DataLayer.m */,
+				A4D99D0C1847686600204D2C /* ShopLayer.h */,
+				A4D99D0D1847686600204D2C /* ShopLayer.m */,
+				A4D99D00184596DF00204D2C /* SystemLayer.h */,
+				A4D99D01184596DF00204D2C /* SystemLayer.m */,
+			);
+			name = Select;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1119,15 +1138,16 @@
 				A4D99D29184EC9CF00204D2C /* itemBtn.png in Resources */,
 				A4C643CF1815362000E9DD3A /* Default.png in Resources */,
 				A4D99D33184F347700204D2C /* textWindow.png in Resources */,
+				A4F0282518547B4D005FC449 /* novelDB.sqlite in Resources */,
 				A4D99D6D1851981800204D2C /* 1_2.png in Resources */,
 				A4C643D91815362000E9DD3A /* Icon-Small-50.png in Resources */,
 				A4D99D25184EC88200204D2C /* time2.png in Resources */,
 				A4C643E41815362000E9DD3A /* iTunesArtwork in Resources */,
 				A4D99D2C184F1E7700204D2C /* classBg.png in Resources */,
 				A4D99D22184EC88200204D2C /* systemBtn.png in Resources */,
-				A4D99D15184DD80E00204D2C /* novelDB.sqlite in Resources */,
 				A4C643DD1815362000E9DD3A /* Icon-Small@2x.png in Resources */,
 				A4D99D32184F347700204D2C /* pen.png in Resources */,
+				A4F0282718548002005FC449 /* bg1.JPG in Resources */,
 				A4D99D24184EC88200204D2C /* time1.png in Resources */,
 				A480A413182981FF00BBC072 /* おれ.jpg in Resources */,
 				A4C643D51815362000E9DD3A /* Default-Landscape~ipad.png in Resources */,

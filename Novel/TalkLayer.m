@@ -37,7 +37,12 @@ enum {
     
     [self textShow];
     
-	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    // キャラクター
+    CCSprite* charSprite = [CCSprite spriteWithFile:@"1_1.png"];
+    charSprite.position = ccp(winSize_.width/2, winSize_.height*0.2);
+    [self addChild:charSprite z:OBJECT_CHARACTER tag:OBJECT_CHARACTER];
+    
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 -(void) onExit
 {
@@ -64,17 +69,28 @@ enum {
     
     textNum = 0;
     
-    self.textArray = [NSMutableArray array];
+    [gameData_ setTextAppontCharID:1];
+    self.textArray = gameData_.textArray;
+    self.nameArray = gameData_.charNameArray;
+    self.inCharArray = gameData_.inCharArray;
     self.labelArray = [NSMutableArray array];
     self.charArray = [NSMutableArray array];
     
+    /*
+    
     [self.textArray addObject:@"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろらりるれろ１２３４５６７８９０"];
     [self.textArray addObject:@"なんやててあ"];
-    [self.textArray addObject:@"fowaejfoaweifao"];
+    [self.textArray addObject:@"fowaejfoaweifao"]
+    */
 }
 
 // レイアウト初期化
 -(void)initLayout{
+    // 背景
+    bgSprite_ = [CCSprite spriteWithFile:@"bg1.JPG"];
+    bgSprite_.position = ccp(winSize_.width/2, winSize_.height/2);
+    [self addChild:bgSprite_];
+    
     // メニューボタン
     menuBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"menuBtn.png"] selectedSprite:[CCSprite spriteWithFile:@"menuBtn.png"] block:^(id sender) {
         NSLog(@"MENU");
@@ -99,10 +115,10 @@ enum {
     [self addChild:penSprite_ z:OBJECT_PEN tag:OBJECT_PEN];
     
     // 名前ラベル
-    charNameLabel_ = [CCLabelTTF labelWithString:@"unknown" fontName:@"Marker Felt" fontSize:25];
+    charNameLabel_ = [CCLabelTTF labelWithString:@" " fontName:@"Marker Felt" fontSize:20];
     charNameLabel_.color = ccBLACK;
     charNameLabel_.anchorPoint = ccp(0, 0);
-    charNameLabel_.position = ccp(textWindow_.position.x+winSize_.height*0.03, textWindow_.position.y - charNameLabel_.contentSize.height);
+    charNameLabel_.position = ccp(textWindow_.position.x+winSize_.height*0.03, textWindow_.position.y - charNameLabel_.contentSize.height*1.1);
     [self addChild:charNameLabel_ z:OBJECT_CHAR_LABEL tag:OBJECT_CHAR_LABEL];
     
     // テキストラベル
@@ -114,11 +130,6 @@ enum {
         [self.labelArray addObject:textLabel];
         [self addChild:textLabel z:OBJECT_LINES_LABEL tag:OBJECT_LINES_LABEL];
     }
-    
-    // キャラクター
-    CCSprite* charSprite = [CCSprite spriteWithFile:@"1_1.png"];
-    charSprite.position = ccp(winSize_.width/2, winSize_.height*0.2);
-    [self addChild:charSprite z:OBJECT_CHARACTER tag:OBJECT_CHARACTER];
 }
 // ペンのアクション
 -(void)jumpPen{
@@ -153,6 +164,8 @@ enum {
 // テキストを登録
 -(void)textShow{
     showText_ = [self.textArray objectAtIndex:textNum];
+    charNameLabel_.string = [self.nameArray objectAtIndex:textNum];
+    NSLog(@"%@",[self.inCharArray objectAtIndex:textNum]);
     isShowText_ = YES;
     [self schedule:@selector(textUp:)];
 }
@@ -170,7 +183,6 @@ enum {
                 else{
                     label.string = [showText_ substringWithRange:NSMakeRange(i*maxLineLength_, maxLineLength_)];
                 }
-                NSLog(@"faaafawefeafaw");
             }
         }
         else if (progressTime_ >= delayTime_) {

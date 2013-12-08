@@ -14,6 +14,7 @@
     CGSize winSize_;
     GameData* gameData_;
     
+    CCSprite* bgSprite_;
     CCMenuItemSprite* menuBtn_;
     CCSprite* textWindow_;
     CCSprite* penSprite_;
@@ -38,6 +39,8 @@
 }
 
 @property (nonatomic,retain)NSMutableArray* textArray;
+@property (nonatomic,retain)NSMutableArray* nameArray;
+@property (nonatomic,retain)NSMutableArray* inCharArray;
 @property (nonatomic,retain)NSMutableArray* labelArray;
 @property (nonatomic,retain)NSMutableArray* charArray;
 @end
