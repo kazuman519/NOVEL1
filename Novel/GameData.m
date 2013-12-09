@@ -97,6 +97,11 @@ static GameData* _gameDataInstance = nil;
     //Databaseへの変更確定
     [db commit];
     
+    update_query = @"UPDATE archive set progressNum = 1,completionNum = 1";
+    [db beginTransaction];
+    [db executeUpdate:update_query];
+    [db commit];
+    
     //Databaseを閉じる
     [db close];
 }
@@ -124,6 +129,24 @@ static GameData* _gameDataInstance = nil;
     int time = (int)(day * 10) % 10;
     
     return time;
+}
+-(int)getCharProgressAppointCharID:(int)charID{
+    float progressNum;
+    FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
+    [db open];
+    
+    //クエリ文を指定
+    NSString *select_query = [NSString stringWithFormat:@"SELECT * FROM archive WHERE charID = %d",charID];
+    [db beginTransaction];
+    
+    FMResultSet *rs = [db executeQuery:select_query];
+    while([rs next]) {
+        progressNum = [rs doubleForColumn:@"progressNum"];
+    }
+    //Databaseを閉じる
+    [db close];
+    
+    return progressNum;
 }
 -(NSString *)getCharNameAppointID:(int)charID{
     NSString* charName;
@@ -178,7 +201,7 @@ static GameData* _gameDataInstance = nil;
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
     //クエリ文を指定
-    NSString *select_query = [NSString stringWithFormat:@"SELECT * FROM text WHERE charID=%d AND part = %d",charID,1];
+    NSString *select_query = [NSString stringWithFormat:@"SELECT * FROM text WHERE charID=%d AND part = %d",charID,[self getCharProgressAppointCharID:charID]];
     [db beginTransaction];
     
     FMResultSet *rs = [db executeQuery:select_query];
@@ -201,7 +224,7 @@ static GameData* _gameDataInstance = nil;
     //Databaseを閉じる
     [db close];
 }
--(void)nextTime{
+-(void)advanceTime{
     [self getAppearanceCharID];
     float day = [self getDay];
     float nextTime;
@@ -228,30 +251,21 @@ static GameData* _gameDataInstance = nil;
     //Databaseを閉じる
     [db close];
 }
-
-
-/*
-// パートを指定して名前と台詞を取得する
--(NSMutableArray*)getLinesArray:(float)part{
-    NSMutableArray *linesArray = [NSMutableArray array];
+-(void)advancePartAppointCharID:(int)charID{
+    int progressNum = [self getCharProgressAppointCharID:charID];
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
     
     //クエリ文を指定
-    NSString *select_query = [NSString stringWithFormat:@"SELECT * FROM novel where part = %f",part];
+    NSString *update_query = [NSString stringWithFormat:@"UPDATE archive SET progressNum = %d WHERE charID = %d",progressNum+1,charID];
+    //クエリ開始
     [db beginTransaction];
+    //クエリ実行
+    [db executeUpdate:update_query];
+    //Databaseへの変更確定
+    [db commit];
     
-    FMResultSet *rs = [db executeQuery:select_query];
-    NSLog(@"id:name:rare:kind:sum:explanation:probability");
-    while([rs next]) {
-        NSLog(@"%@ : %@",[rs stringForColumn:@"char"] ,[rs stringForColumn:@"lines"]);
-        [linesArray addObject:[rs stringForColumn:@"char"]];
-        [linesArray addObject:[rs stringForColumn:@"lines"]];
-    }
     //Databaseを閉じる
     [db close];
-    
-    return linesArray;
 }
-*/
 @end

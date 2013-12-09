@@ -32,8 +32,10 @@
 -(void)newData;
 -(float)getDay;
 -(int)getTime;
+-(int)getCharProgressAppointCharID:(int)charID;
 -(NSString*)getCharNameAppointID:(int)charID;
 -(NSMutableArray*)getAppearanceCharID;
 -(void)setTextAppontCharID:(int)charID;
--(void)nextTime;
+-(void)advanceTime;
+-(void)advancePartAppointCharID:(int)charID;
 @end

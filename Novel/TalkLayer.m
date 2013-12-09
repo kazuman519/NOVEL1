@@ -158,7 +158,8 @@ enum {
     else{
         // パートのテキストが終了したら
         NSLog(@"PART END");
-        [gameData_ nextTime];
+        [gameData_ advanceTime];
+        [gameData_ advancePartAppointCharID:1];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5 scene:[MenuScene node]]];
     }
 }
@@ -168,6 +169,8 @@ enum {
     showText_ = [self.textArray objectAtIndex:textNum];
     charNameLabel_.string = [self.nameArray objectAtIndex:textNum];
     
+    
+    // 演出があるかのチェック
     NSNumber* inChar = [self.inCharArray objectAtIndex:textNum];
     NSNumber* outChar = [self.outCharArray objectAtIndex:textNum];
     if (inChar.floatValue != 0.0f) {
