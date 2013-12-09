@@ -70,22 +70,18 @@ enum {
     self.textArray = gameData_.textArray;
     self.nameArray = gameData_.charNameArray;
     self.inCharArray = gameData_.inCharArray;
+    self.outCharArray = gameData_.outCharArray;
     self.labelArray = [NSMutableArray array];
     self.charArray = [NSMutableArray array];
+    self.charIDArray = [NSMutableArray array];
     self.charPosArray = [NSMutableArray array];
     
     int division = 3;
     for (int i = 0; i <= division+1; i++) {
-        CGPoint charPos = ccp(zeroPos_.x + winSize_.width/(division+1)*i,0);
+        CGPoint charPos = ccp(zeroPos_.x + 480/(division+1)*i,winSize_.height*0.4);
         [self.charPosArray addObject:[NSValue valueWithCGPoint:charPos]];
         NSLog(@"num:%d xpos:%f",i,charPos.x);
     }
-    /*
-    
-    [self.textArray addObject:@"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろらりるれろ１２３４５６７８９０"];
-    [self.textArray addObject:@"なんやててあ"];
-    [self.textArray addObject:@"fowaejfoaweifao"]
-    */
 }
 
 // レイアウト初期化
@@ -160,8 +156,10 @@ enum {
         [self textShow];
     }
     else{
-        textNum = 0;
-        [self textShow];
+        // パートのテキストが終了したら
+        NSLog(@"PART END");
+        [gameData_ nextTime];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5 scene:[MenuScene node]]];
     }
 }
 
@@ -169,11 +167,16 @@ enum {
 -(void)textShow{
     showText_ = [self.textArray objectAtIndex:textNum];
     charNameLabel_.string = [self.nameArray objectAtIndex:textNum];
-    NSLog(@"%@",[self.inCharArray objectAtIndex:textNum]);
+    
     NSNumber* inChar = [self.inCharArray objectAtIndex:textNum];
+    NSNumber* outChar = [self.outCharArray objectAtIndex:textNum];
     if (inChar.floatValue != 0.0f) {
-        [self characterAction:inChar.floatValue];
+        [self inCharAction:inChar.floatValue];
     }
+    if (outChar.floatValue != 0.0f) {
+        [self outCharAction:outChar.floatValue];
+    }
+    
     isShowText_ = YES;
     [self schedule:@selector(textUp:)];
 }
@@ -214,20 +217,55 @@ enum {
     progressTime_ += delta;
 }
 
--(void)characterAction:(float)num{
+-(void)inCharAction:(float)num{
+    NSLog(@"IN%f",num);
     int charID = num;
-    int check = (int)(num * 10) % 10;
-    CCSprite* charSprite = [CCSprite spriteWithFile:@"1_1.png"];
-    if (check >=2) {
-        charSprite.position = ccp(winSize_.width + charSprite.contentSize.width, 0);
-    }else{
-        charSprite.position = ccp(-charSprite.contentSize.width, 0);
-    }
-    [self addChild:charSprite];
+    int pos = (int)(num * 10) % 10;
+    BOOL isAlready = NO;
+    CCSprite* charSprite;
     
-    NSValue* posValue = [self.charPosArray objectAtIndex:check];
-    id moveTo = [CCMoveTo actionWithDuration:0.5 position:ccp(posValue.CGPointValue.x, 0)];
+    int i = 0;
+    for (NSNumber* charIDNum in self.charIDArray){
+        if (charIDNum.intValue == charID) {
+            charSprite = [self.charArray objectAtIndex:i];
+            isAlready = YES;
+        }
+        i++;
+    }
+    if (!isAlready) {
+        charSprite = [CCSprite spriteWithFile:[NSString stringWithFormat:@"char%d_1.png",charID]];
+        if (pos >=2) {
+            charSprite.position = ccp(winSize_.width + charSprite.contentSize.width, winSize_.height*0.2);
+        }else{
+            charSprite.position = ccp(-charSprite.contentSize.width, winSize_.height*0.2);
+        }
+        [self addChild:charSprite];
+        [self.charArray addObject:charSprite];
+        [self.charIDArray addObject:[NSNumber numberWithInt:num]];
+    }
+    NSValue* posValue = [self.charPosArray objectAtIndex:pos];
+    id moveTo = [CCMoveTo actionWithDuration:0.4 position:ccp(posValue.CGPointValue.x, winSize_.height*0.2)];
     [charSprite runAction:moveTo];
+}
+-(void)outCharAction:(float)num{
+    NSLog(@"OUT%f",num);
+    int charID = num;
+    int i = 0;
+    for (NSNumber* charIDNum in self.charIDArray){
+        NSLog(@"nubmeer%d",charIDNum.intValue);
+        if (charIDNum.intValue == charID) {
+            CCSprite* charSprite = [self.charArray objectAtIndex:i];
+            
+            id moveTo;
+            if (charSprite.position.x > winSize_.width/2) {
+                moveTo = [CCMoveTo actionWithDuration:0.3 position:ccp(winSize_.width+charSprite.contentSize.width, charSprite.position.y)];
+            }else{
+                moveTo = [CCMoveTo actionWithDuration:0.3 position:ccp(-charSprite.contentSize.width, charSprite.position.y)];
+            }
+            [charSprite runAction:moveTo];
+        }
+        i++;
+    }
 }
 
 //---- タッチ処理 ----

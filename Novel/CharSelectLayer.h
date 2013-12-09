@@ -13,18 +13,19 @@
 
 @interface CharSelectLayer : CCLayer {
     CGSize winSize_;
+    CGPoint zeroPos_;
     GameData* gameData_;
     
-    CCLabelTTF* titleLabel_;
-    CCMenuItemFont* returnBtn_;
+    CCSprite* titleSprite_;
+    CCMenuItemSprite* returnBtn_;
     
-    CGPoint titleLabelPos_;
+    CGPoint titleSpritePos_;
     CGPoint returnBtnPos_;
 }
 
-@property (nonatomic,retain) NSMutableArray* nameArray;
-@property (nonatomic,retain) NSMutableArray* nameBarArray;
-@property (nonatomic,retain) NSMutableArray* nameBarPosArray;
+@property (nonatomic,retain) NSMutableArray* charIDArray;
+@property (nonatomic,retain) NSMutableArray* selectCharArray;
+@property (nonatomic,retain) NSMutableArray* selectCharPosArray;
 @property BOOL isReturn;
 
 -(void)showAction;

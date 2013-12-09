@@ -52,7 +52,6 @@
         NSLog(@"TALK");
         self.isShowTalk = YES;
         [self hideAction];
-        [gameData_ nextTime];
     }];
     itemBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"itemBtn.png"] selectedSprite:[CCSprite spriteWithFile:@"itemBtn.png"] block:^(id sender) {
         NSLog(@"ITEM");

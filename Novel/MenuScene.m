@@ -7,11 +7,15 @@
 //
 
 #import "MenuScene.h"
-
+enum{
+    OBJECT_OTHER,
+    OBJECT_SIDE_BAR
+};
 
 @implementation MenuScene
 -(id)init{
     if (self=[super init]) {
+        winSize_ = [[CCDirector sharedDirector] winSize];
 
         [self initLayer];
         [self initLayout];
@@ -21,6 +25,17 @@
 }
 
 -(void)initLayer{
+    // サイドバーの設定
+    if (winSize_.width == 568) {
+        CCSprite* leftBar = [CCSprite spriteWithFile:@"sideBar.png"];
+        CCSprite* rightBar = [CCSprite spriteWithFile:@"sideBar.png"];
+        leftBar.anchorPoint = ccp(0.0, 0);
+        rightBar.anchorPoint = ccp(1.0, 0);
+        leftBar.position = ccp(0, 0);
+        rightBar.position = ccp(winSize_.width, 0);
+        [self addChild:leftBar z:OBJECT_SIDE_BAR];
+        [self addChild:rightBar z:OBJECT_SIDE_BAR];
+    }
     actionSelectLayer_ = [ActionSelectLayer node];
     charSelectLayer_ = [CharSelectLayer node];
     itemLayer_ = [ItemLayer node];

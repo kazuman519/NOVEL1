@@ -42,7 +42,9 @@
 @property (nonatomic,retain)NSMutableArray* textArray;
 @property (nonatomic,retain)NSMutableArray* nameArray;
 @property (nonatomic,retain)NSMutableArray* inCharArray;
+@property (nonatomic,retain)NSMutableArray* outCharArray;
 @property (nonatomic,retain)NSMutableArray* labelArray;
 @property (nonatomic,retain)NSMutableArray* charArray;
+@property (nonatomic,retain)NSMutableArray* charIDArray;
 @property (nonatomic,retain)NSMutableArray* charPosArray;
 @end

@@ -140,8 +140,7 @@ static GameData* _gameDataInstance = nil;
     
     return charName;
 }
--(NSMutableArray *)getAppearanceCharName{
-    NSMutableArray* nameArray = [NSMutableArray array];
+-(NSMutableArray *)getAppearanceCharID{
     NSMutableArray* idArray = [NSMutableArray array];
     float progressDay = [self getDay];
     int   charNum;
@@ -165,11 +164,7 @@ static GameData* _gameDataInstance = nil;
     //Databaseを閉じる
     [db close];
     
-    for (NSNumber* idNum in idArray){
-        [nameArray addObject:[self getCharNameAppointID:idNum.intValue]];
-    }
-    
-    return nameArray;
+    return idArray;
 }
 -(void)setTextAppontCharID:(int)charID{
     [self.textArray removeAllObjects];
@@ -198,7 +193,7 @@ static GameData* _gameDataInstance = nil;
         }
         [self.charNameArray addObject:name];
         [self.inCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"inChar"]]];
-        [self.outCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"outCharID"]]];
+        [self.outCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"outChar"]]];
         [self.changeBgArray addObject:[rs stringForColumn:@"text"]];
         [self.winEfeArray addObject:[rs stringForColumn:@"text"]];
         [self.charGraArray addObject:[rs stringForColumn:@"text"]];
@@ -207,7 +202,7 @@ static GameData* _gameDataInstance = nil;
     [db close];
 }
 -(void)nextTime{
-    [self getAppearanceCharName];
+    [self getAppearanceCharID];
     float day = [self getDay];
     float nextTime;
     int check = (int)(day * 10) % 10;

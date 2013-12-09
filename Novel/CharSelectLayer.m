@@ -14,11 +14,12 @@
     if (self=[super init]) {
         // 値の初期化
         winSize_ = [[CCDirector sharedDirector] winSize];
+        zeroPos_ = ccp(winSize_.width/2- 240, 0);
         gameData_ = [GameData getInstance];
         
-        self.nameArray = [gameData_ getAppearanceCharName];
-        self.nameBarArray = [NSMutableArray array];
-        self.nameBarPosArray = [NSMutableArray array];
+        self.charIDArray = [gameData_ getAppearanceCharID];
+        self.selectCharArray = [NSMutableArray array];
+        self.selectCharPosArray = [NSMutableArray array];
         self.isReturn = NO;
         
         [self initLayout];
@@ -27,56 +28,53 @@
 }
 
 -(void)initLayout{
-    titleLabel_ = [CCLabelTTF labelWithString:@"会話相手一覧" fontName:@"Marker Felt" fontSize:30];
-    titleLabel_.anchorPoint = ccp(0, 1.0);
-    titleLabel_.position = titleLabelPos_ = ccp(winSize_.width/2 - winSize_.height*0.6, winSize_.height - winSize_.height*0.05);
-    [self addChild:titleLabel_];
+    titleSprite_ = [CCSprite spriteWithFile:@"charSeleTitle.png"];
+    titleSprite_.anchorPoint = ccp(0, 1.0);
+    titleSprite_.position = titleSpritePos_ = ccp(zeroPos_.x, winSize_.height - winSize_.height*0.05);
+    [self addChild:titleSprite_];
     
-    [CCMenuItemFont setFontSize:18];
-    [CCMenuItemFont setFontName:@"Marker Felt"];
-    returnBtn_ = [CCMenuItemFont itemWithString:@"もどる" block:^(id sender) {
+    returnBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"returnBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"returnBtn2.png"] block:^(id sender) {
         NSLog(@"RETURN");
         self.isReturn = YES;
     }];
-    returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.5, returnBtn_.contentSize.height);
+    returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.6, winSize_.height - returnBtn_.contentSize.height);
     
     CCMenu* menu = [CCMenu menuWithItems:returnBtn_, nil];
     menu.position = ccp(0, 0);
     [self addChild:menu];
     
-    for (int i=0; i<self.nameArray.count; i++) {
-        CGPoint nameBarPos;
-        NSString* charName = [self.nameArray objectAtIndex:i];
-        CCMenuItemFont* nameBar = [CCMenuItemFont itemWithString:charName block:^(id sender) {
-            NSLog(@"select:%@",charName);
+    for (int i=0; i<self.charIDArray.count; i++) {
+        CGPoint selectCharPos;
+        NSNumber* charID = [self.charIDArray objectAtIndex:i];
+        CCMenuItemSprite* selectChar = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"selectChar%d.png",charID.intValue]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"selectChar%d.png",charID.intValue]]  block:^(id sender) {
+            NSLog(@"select:%d",charID.intValue);
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[TalkLayer node] ]];
             
         }];
-        nameBar.fontSize=18;
-        nameBar.fontName = @"Marker Felt";
-        nameBar.position = nameBarPos = ccp(winSize_.width/2 - winSize_.height*0.2, titleLabel_.position.y - winSize_.height*0.2 - winSize_.height *0.17 * i);
-        [menu addChild:nameBar];
+        selectChar.anchorPoint = ccp(0.0, 1.0);
+        selectChar.position = selectCharPos = ccp(zeroPos_.x + winSize_.height*0.03 + selectChar.contentSize.width * (i%2), winSize_.height * 0.78 - selectChar.contentSize.height * (i/2));
+        [menu addChild:selectChar];
         
-        [self.nameBarArray addObject:nameBar];
-        [self.nameBarPosArray addObject:[NSValue valueWithCGPoint:nameBarPos]];
+        [self.selectCharArray addObject:selectChar];
+        [self.selectCharPosArray addObject:[NSValue valueWithCGPoint:selectCharPos]];
     }
 }
 
 -(void)showAction{
-    [self movePosNode:titleLabel_ position:titleLabelPos_];
+    [self movePosNode:titleSprite_ position:titleSpritePos_];
     [self movePosNode:returnBtn_ position:returnBtnPos_];
     int i = 0;
-    for (CCLabelTTF* nameBar in self.nameBarArray){
-        NSValue* posValue = [self.nameBarPosArray objectAtIndex:i];
-        [self movePosNode:nameBar position:[posValue CGPointValue]];
+    for (CCMenuItemSprite* selectChar in self.selectCharArray){
+        NSValue* posValue = [self.selectCharPosArray objectAtIndex:i];
+        [self movePosNode:selectChar position:[posValue CGPointValue]];
         i++;
     }
 }
 -(void)hideAction{
-    [self moveDownNode:returnBtn_];
-    [self moveUpNode:titleLabel_];
-    for (CCLabelTTF* nameBar in self.nameBarArray){
-        [self moveDownNode:nameBar];
+    [self moveUpNode:returnBtn_];
+    [self moveUpNode:titleSprite_];
+    for (CCMenuItemSprite* selectChar in self.selectCharArray){
+        [self moveDownNode:selectChar];
     }
 }
 -(void)movePosNode:(CCNode*)node position:(CGPoint)positon{

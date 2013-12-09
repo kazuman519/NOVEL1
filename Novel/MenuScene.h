@@ -17,6 +17,8 @@
 
 
 @interface MenuScene : CCLayer {
+    CGSize winSize_;
+    
     ActionSelectLayer*  actionSelectLayer_;
     CharSelectLayer*    charSelectLayer_;
     ItemLayer*          itemLayer_;

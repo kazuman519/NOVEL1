@@ -33,7 +33,7 @@
 -(float)getDay;
 -(int)getTime;
 -(NSString*)getCharNameAppointID:(int)charID;
--(NSMutableArray*)getAppearanceCharName;
+-(NSMutableArray*)getAppearanceCharID;
 -(void)setTextAppontCharID:(int)charID;
 -(void)nextTime;
 @end
