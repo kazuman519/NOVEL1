@@ -197,16 +197,11 @@ static GameData* _gameDataInstance = nil;
             name = [rs stringForColumn:@"name"];
         }
         [self.charNameArray addObject:name];
-        NSNumber* number = [NSNumber numberWithFloat:[rs doubleForColumn:@"inChar"]];
-        [self.inCharArray addObject:name];
-        NSLog(@"inchar%@   count:%d",number,self.winEfeArray.count);
+        [self.inCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"inChar"]]];
         [self.outCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"outCharID"]]];
         [self.changeBgArray addObject:[rs stringForColumn:@"text"]];
         [self.winEfeArray addObject:[rs stringForColumn:@"text"]];
         [self.charGraArray addObject:[rs stringForColumn:@"text"]];
-    }
-    for (NSNumber *number in self.inCharArray){
-        NSLog(@"feafaenumber %@",number);
     }
     //Databaseを閉じる
     [db close];

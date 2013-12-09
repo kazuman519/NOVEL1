@@ -12,6 +12,7 @@
 
 @interface TalkLayer : CCLayer {
     CGSize winSize_;
+    CGPoint zeroPos_;
     GameData* gameData_;
     
     CCSprite* bgSprite_;
@@ -43,4 +44,5 @@
 @property (nonatomic,retain)NSMutableArray* inCharArray;
 @property (nonatomic,retain)NSMutableArray* labelArray;
 @property (nonatomic,retain)NSMutableArray* charArray;
+@property (nonatomic,retain)NSMutableArray* charPosArray;
 @end

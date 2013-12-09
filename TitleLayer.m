@@ -22,15 +22,22 @@
 }
 
 -(void)initLayout{
-    titleLabel_ = [CCLabelTTF labelWithString:@"のべるげーむ" fontName:@"Marker Felt" fontSize:40];
-    titleLabel_.anchorPoint = ccp(0.5, 1.0);
-    titleLabel_.position = ccp(winSize_.width/2, winSize_.height);
-    [self addChild:titleLabel_];
+    float randomValue = CCRANDOM_0_1();
+    int number;
+    if (randomValue < 0.5) {
+        number = 1;
+    }else{
+        number = 2;
+    }
     
+    bgSprite_ = [CCSprite spriteWithFile:[NSString stringWithFormat:@"titleBg%d.png",number]];
+    bgSprite_.position = ccp(winSize_.width/2, winSize_.height/2);
+    [self addChild:bgSprite_];
+
     
     [CCMenuItemFont setFontSize:16];
     [CCMenuItemFont setFontName:@"Marker Felt"];
-    startBtn_ = [CCMenuItemFont itemWithString:@"はじめから" block:^(id sender) {
+    startBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"startBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"startBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"GAME START");
         
         // 確認アラート
@@ -40,29 +47,29 @@
                                   delegate:self cancelButtonTitle:@"いいえ" otherButtonTitles:@"はい", nil];
         [alert show];
     }];
-    continuBtn_ = [CCMenuItemFont itemWithString:@"つづきから" block:^(id sender) {
+    continuBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"continueBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"continueBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"CONTINUE");
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MenuScene node]]];
     }];
-    archiveBtn_ = [CCMenuItemFont itemWithString:@"アーカイブ" block:^(id sender) {
+    archiveBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"archiveBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"archiveBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"ARCHIVE");
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[ArchiveLayer node]]];
     }];
-    helpBtn_ = [CCMenuItemFont itemWithString:@"ヘルプ" block:^(id sender) {
+    helpBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"helpBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"helpBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"HELP");
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelpLayer node]]];
     }];
-    optionBtn_ = [CCMenuItemFont itemWithString:@"オプション" block:^(id sender) {
+    optionBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"optionBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"optionBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"OPTION");
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[SystemLayer node] ]];
         
     }];
     
-    startBtn_.position = ccp(winSize_.width*0.1, winSize_.height*0.1);
-    continuBtn_.position = ccp(winSize_.width*0.3, winSize_.height*0.1);
-    archiveBtn_.position = ccp(winSize_.width*0.5, winSize_.height*0.1);
-    helpBtn_.position = ccp(winSize_.width*0.7, winSize_.height*0.1);
-    optionBtn_.position = ccp(winSize_.width*0.9, winSize_.height*0.1);
+    startBtn_.position = ccp(winSize_.width/2 + winSize_.height*0.5, winSize_.height*0.8);
+    continuBtn_.position = ccp(winSize_.width/2 + winSize_.height*0.5, winSize_.height*0.65);
+    archiveBtn_.position = ccp(winSize_.width/2 + winSize_.height*0.5, winSize_.height*0.5);
+    helpBtn_.position = ccp(winSize_.width/2 + winSize_.height*0.5, winSize_.height*0.35);
+    optionBtn_.position = ccp(winSize_.width/2 + winSize_.height*0.5, winSize_.height*0.2);
     
     
     CCMenu* menu = [CCMenu menuWithItems:startBtn_, continuBtn_, archiveBtn_, helpBtn_, optionBtn_, nil];

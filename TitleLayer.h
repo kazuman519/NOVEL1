@@ -18,12 +18,12 @@
     CGSize winSize_;
     GameData* gameData_;
     
-    CCLabelTTF* titleLabel_;
-    CCMenuItemFont* startBtn_;
-    CCMenuItemFont* continuBtn_;
-    CCMenuItemFont* archiveBtn_;
-    CCMenuItemFont* helpBtn_;
-    CCMenuItemFont* optionBtn_;
+    CCSprite* bgSprite_;
+    CCMenuItemSprite* startBtn_;
+    CCMenuItemSprite* continuBtn_;
+    CCMenuItemSprite* archiveBtn_;
+    CCMenuItemSprite* helpBtn_;
+    CCMenuItemSprite* optionBtn_;
 }
 
 @end

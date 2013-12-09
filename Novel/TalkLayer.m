@@ -24,6 +24,7 @@ enum {
 -(id)init{
     if (self=[super init]) {
         winSize_ = [[CCDirector sharedDirector] winSize];
+        zeroPos_ = ccp(winSize_.width/2-240, 0);
         gameData_ = [GameData getInstance];
         
         [self initValue];
@@ -37,10 +38,6 @@ enum {
     
     [self textShow];
     
-    // キャラクター
-    CCSprite* charSprite = [CCSprite spriteWithFile:@"1_1.png"];
-    charSprite.position = ccp(winSize_.width/2, winSize_.height*0.2);
-    [self addChild:charSprite z:OBJECT_CHARACTER tag:OBJECT_CHARACTER];
     
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
@@ -75,7 +72,14 @@ enum {
     self.inCharArray = gameData_.inCharArray;
     self.labelArray = [NSMutableArray array];
     self.charArray = [NSMutableArray array];
+    self.charPosArray = [NSMutableArray array];
     
+    int division = 3;
+    for (int i = 0; i <= division+1; i++) {
+        CGPoint charPos = ccp(zeroPos_.x + winSize_.width/(division+1)*i,0);
+        [self.charPosArray addObject:[NSValue valueWithCGPoint:charPos]];
+        NSLog(@"num:%d xpos:%f",i,charPos.x);
+    }
     /*
     
     [self.textArray addObject:@"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもらりるれろらりるれろ１２３４５６７８９０"];
@@ -166,6 +170,10 @@ enum {
     showText_ = [self.textArray objectAtIndex:textNum];
     charNameLabel_.string = [self.nameArray objectAtIndex:textNum];
     NSLog(@"%@",[self.inCharArray objectAtIndex:textNum]);
+    NSNumber* inChar = [self.inCharArray objectAtIndex:textNum];
+    if (inChar.floatValue != 0.0f) {
+        [self characterAction:inChar.floatValue];
+    }
     isShowText_ = YES;
     [self schedule:@selector(textUp:)];
 }
@@ -204,6 +212,22 @@ enum {
         [self unschedule:@selector(textUp:)];
     }
     progressTime_ += delta;
+}
+
+-(void)characterAction:(float)num{
+    int charID = num;
+    int check = (int)(num * 10) % 10;
+    CCSprite* charSprite = [CCSprite spriteWithFile:@"1_1.png"];
+    if (check >=2) {
+        charSprite.position = ccp(winSize_.width + charSprite.contentSize.width, 0);
+    }else{
+        charSprite.position = ccp(-charSprite.contentSize.width, 0);
+    }
+    [self addChild:charSprite];
+    
+    NSValue* posValue = [self.charPosArray objectAtIndex:check];
+    id moveTo = [CCMoveTo actionWithDuration:0.5 position:ccp(posValue.CGPointValue.x, 0)];
+    [charSprite runAction:moveTo];
 }
 
 //---- タッチ処理 ----
