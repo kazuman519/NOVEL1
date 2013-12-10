@@ -7,7 +7,7 @@
 //
 
 #import "CharSelectLayer.h"
-
+#import "CCScrollLayer.h"
 
 @implementation CharSelectLayer
 -(id)init{
@@ -28,11 +28,13 @@
 }
 
 -(void)initLayout{
+    // タイトル
     titleSprite_ = [CCSprite spriteWithFile:@"charSeleTitle.png"];
     titleSprite_.anchorPoint = ccp(0, 1.0);
     titleSprite_.position = titleSpritePos_ = ccp(zeroPos_.x, winSize_.height - winSize_.height*0.05);
     [self addChild:titleSprite_];
     
+    // 戻るボタン
     returnBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"returnBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"returnBtn2.png"] block:^(id sender) {
         NSLog(@"RETURN");
         self.isReturn = YES;
@@ -43,7 +45,18 @@
     menu.position = ccp(0, 0);
     [self addChild:menu];
     
+    
+    // 選択キャラクター
+    NSMutableArray *layerArray = [NSMutableArray array];
     for (int i=0; i<self.charIDArray.count; i++) {
+        int pageNum = i/2;
+        CCLayer* layer = [CCLayer node];
+        if (layerArray.count == pageNum) {
+            [layerArray addObject:layer];
+        }else{
+            layer = [layerArray objectAtIndex:pageNum];
+        }
+        
         CGPoint selectCharPos;
         NSNumber* charID = [self.charIDArray objectAtIndex:i];
         CCMenuItemSprite* selectChar = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"selectChar%d.png",charID.intValue]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"selectChar%d.png",charID.intValue]]  block:^(id sender) {
@@ -52,12 +65,18 @@
             
         }];
         selectChar.anchorPoint = ccp(0.0, 1.0);
-        selectChar.position = selectCharPos = ccp(zeroPos_.x + winSize_.height*0.03 + selectChar.contentSize.width * (i%2), winSize_.height * 0.78 - selectChar.contentSize.height * (i/2));
-        [menu addChild:selectChar];
+        selectChar.position = selectCharPos = ccp(zeroPos_.x + winSize_.height*0.03 + selectChar.contentSize.width * (i%2), winSize_.height * 0.78 - selectChar.contentSize.height * (0));
+        CCMenu* menu1 = [CCMenu menuWithItems:selectChar, nil];
+        menu1.position = ccp(0, 0);
+        [layer addChild:menu1];
         
         [self.selectCharArray addObject:selectChar];
         [self.selectCharPosArray addObject:[NSValue valueWithCGPoint:selectCharPos]];
     }
+    // CCScrollLayerに突っ込む
+    CCScrollLayer *scroller = [[CCScrollLayer alloc] initWithLayers:layerArray widthOffset: 0];
+    scroller.pagesIndicatorPosition = ccp(winSize_.width/2, 20);
+    [self addChild:scroller];
 }
 
 -(void)showAction{

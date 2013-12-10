@@ -216,8 +216,9 @@
 		A4F0287F18558806005FC449 /* char5_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F0287318558806005FC449 /* char5_2.png */; };
 		A4F0288018558806005FC449 /* char6_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F0287418558806005FC449 /* char6_1.png */; };
 		A4F0288118558806005FC449 /* char6_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F0287518558806005FC449 /* char6_2.png */; };
-		A4F028831855944F005FC449 /* novelDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = A4F028821855944F005FC449 /* novelDB.sqlite */; };
 		A4F028851855976A005FC449 /* sideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F028841855976A005FC449 /* sideBar.png */; };
+		A4F028871855B00B005FC449 /* novelDB.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = A4F028861855B00B005FC449 /* novelDB.sqlite */; };
+		A4F028911856CE8E005FC449 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A4F0288D1856C9C4005FC449 /* CCScrollLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -594,8 +595,10 @@
 		A4F0287318558806005FC449 /* char5_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char5_2.png; sourceTree = "<group>"; };
 		A4F0287418558806005FC449 /* char6_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char6_1.png; sourceTree = "<group>"; };
 		A4F0287518558806005FC449 /* char6_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = char6_2.png; sourceTree = "<group>"; };
-		A4F028821855944F005FC449 /* novelDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = novelDB.sqlite; sourceTree = "<group>"; };
 		A4F028841855976A005FC449 /* sideBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideBar.png; sourceTree = "<group>"; };
+		A4F028861855B00B005FC449 /* novelDB.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = novelDB.sqlite; sourceTree = "<group>"; };
+		A4F0288C1856C9C4005FC449 /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScrollLayer.h; sourceTree = "<group>"; };
+		A4F0288D1856C9C4005FC449 /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCScrollLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -688,6 +691,7 @@
 		A4C643CC1815362000E9DD3A /* Novel */ = {
 			isa = PBXGroup;
 			children = (
+				A4F028881856C508005FC449 /* CCScrollLayer */,
 				A480A40D182981C300BBC072 /* Images */,
 				A4C14C60181777BD0000CF3D /* FMDB */,
 				A4C6455A1815362200E9DD3A /* AppDelegate.h */,
@@ -716,7 +720,7 @@
 		A4C643CD1815362000E9DD3A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A4F028821855944F005FC449 /* novelDB.sqlite */,
+				A4F028861855B00B005FC449 /* novelDB.sqlite */,
 				A4C643CE1815362000E9DD3A /* Default.png */,
 				A4C643D01815362000E9DD3A /* Default@2x.png */,
 				A4C643D21815362000E9DD3A /* Default-568h@2x.png */,
@@ -1215,6 +1219,15 @@
 			name = CharSelect;
 			sourceTree = "<group>";
 		};
+		A4F028881856C508005FC449 /* CCScrollLayer */ = {
+			isa = PBXGroup;
+			children = (
+				A4F0288C1856C9C4005FC449 /* CCScrollLayer.h */,
+				A4F0288D1856C9C4005FC449 /* CCScrollLayer.m */,
+			);
+			name = CCScrollLayer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1274,10 +1287,10 @@
 				A4D99D31184F347700204D2C /* menuBtn.png in Resources */,
 				A4F0285418555E24005FC449 /* titleBg2.png in Resources */,
 				A4C643D11815362000E9DD3A /* Default@2x.png in Resources */,
-				A4F028831855944F005FC449 /* novelDB.sqlite in Resources */,
 				A4F0287A18558806005FC449 /* char3_1.png in Resources */,
 				A4F028851855976A005FC449 /* sideBar.png in Resources */,
 				A4C643DB1815362000E9DD3A /* Icon-Small.png in Resources */,
+				A4F028871855B00B005FC449 /* novelDB.sqlite in Resources */,
 				A4F0287D18558806005FC449 /* char4_2.png in Resources */,
 				A4F0287C18558806005FC449 /* char4_1.png in Resources */,
 				A4F0284A18555E24005FC449 /* helpBtn2_2.png in Resources */,
@@ -1349,6 +1362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4F028911856CE8E005FC449 /* CCScrollLayer.m in Sources */,
 				A4C644231815362000E9DD3A /* ccDeprecated.m in Sources */,
 				A4C644EE1815362200E9DD3A /* ccCArray.m in Sources */,
 				A4C644351815362000E9DD3A /* ccGLStateCache.m in Sources */,
