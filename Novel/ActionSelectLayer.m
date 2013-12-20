@@ -48,27 +48,27 @@
     timeSprite_.position = ccp(zeroPos_.x, 0);
     [self addChild:timeSprite_];
     
-    talkBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"talkBtn.png"] selectedSprite:[CCSprite spriteWithFile:@"talkBtn.png"] block:^(id sender) {
+    talkBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"talkBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"talkBtn2.png"] block:^(id sender) {
         NSLog(@"TALK");
         self.isShowTalk = YES;
         [self hideAction];
     }];
-    itemBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"itemBtn.png"] selectedSprite:[CCSprite spriteWithFile:@"itemBtn.png"] block:^(id sender) {
+    itemBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"itemBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"itemBtn2.png"] block:^(id sender) {
         NSLog(@"ITEM");
         self.isShowItem = YES;
         [self hideAction];
     }];
-    dataBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"dataBtn.png"] selectedSprite:[CCSprite spriteWithFile:@"dataBtn.png"] block:^(id sender) {
+    dataBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"dataBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"dataBtn2.png"] block:^(id sender) {
         NSLog(@"DATA");
         self.isShowData = YES;
         [self hideAction];
     }];
-    shopBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"shopBtn.png"] selectedSprite:[CCSprite spriteWithFile:@"shopBtn.png"] block:^(id sender) {
+    shopBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"shopBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"shopBtn2.png"] block:^(id sender) {
         NSLog(@"SHOP");
         self.isShowShop = YES;
         [self hideAction];
     }];
-    systemBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"systemBtn.png"] selectedSprite:[CCSprite spriteWithFile:@"systemBtn.png"] block:^(id sender) {
+    systemBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"systemBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"systemBtn2.png"] block:^(id sender) {
         NSLog(@"SYSTEM");
         self.isShowSystem = YES;
         [self hideAction];

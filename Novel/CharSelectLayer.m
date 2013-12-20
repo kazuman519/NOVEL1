@@ -7,7 +7,6 @@
 //
 
 #import "CharSelectLayer.h"
-#import "CCScrollLayer.h"
 
 @implementation CharSelectLayer
 -(id)init{
@@ -74,14 +73,16 @@
         [self.selectCharPosArray addObject:[NSValue valueWithCGPoint:selectCharPos]];
     }
     // CCScrollLayerに突っ込む
-    CCScrollLayer *scroller = [[CCScrollLayer alloc] initWithLayers:layerArray widthOffset: 0];
-    scroller.pagesIndicatorPosition = ccp(winSize_.width/2, 20);
-    [self addChild:scroller];
+    scroller_ = [[CCScrollLayer alloc] initWithLayers:layerArray widthOffset: 0];
+    scroller_.pagesIndicatorPosition = scrollerIndicatorPos_ = ccp(winSize_.width/2, 20);
+    [self addChild:scroller_];
 }
 
 -(void)showAction{
     [self movePosNode:titleSprite_ position:titleSpritePos_];
     [self movePosNode:returnBtn_ position:returnBtnPos_];
+    scroller_.pagesIndicatorPosition = scrollerIndicatorPos_;
+    scroller_.touchEnabled = YES;
     int i = 0;
     for (CCMenuItemSprite* selectChar in self.selectCharArray){
         NSValue* posValue = [self.selectCharPosArray objectAtIndex:i];
@@ -92,6 +93,8 @@
 -(void)hideAction{
     [self moveUpNode:returnBtn_];
     [self moveUpNode:titleSprite_];
+    scroller_.pagesIndicatorPosition = ccp(0, -50);
+    scroller_.touchEnabled = NO;
     for (CCMenuItemSprite* selectChar in self.selectCharArray){
         [self moveDownNode:selectChar];
     }

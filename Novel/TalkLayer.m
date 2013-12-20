@@ -220,6 +220,7 @@ enum {
     progressTime_ += delta;
 }
 
+// キャラクターを登場させるアクション
 -(void)inCharAction:(float)num{
     NSLog(@"IN%f",num);
     int charID = num;
@@ -250,6 +251,7 @@ enum {
     id moveTo = [CCMoveTo actionWithDuration:0.4 position:ccp(posValue.CGPointValue.x, winSize_.height*0.2)];
     [charSprite runAction:moveTo];
 }
+// キャラクターが画面外に出るアクション
 -(void)outCharAction:(float)num{
     NSLog(@"OUT%f",num);
     int charID = num;
@@ -284,6 +286,9 @@ enum {
         if (!isShowText_) {
             NSLog(@"NEXT");
             [self nextText];
+            
+            // テスト
+            []
         }
         else{
             NSLog(@"SKIP");

@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "GameData.h"
 #import "TalkLayer.h"
+#import "CCScrollLayer.h"
 
 @interface CharSelectLayer : CCLayer {
     CGSize winSize_;
@@ -18,9 +19,11 @@
     
     CCSprite* titleSprite_;
     CCMenuItemSprite* returnBtn_;
+    CCScrollLayer* scroller_;
     
     CGPoint titleSpritePos_;
     CGPoint returnBtnPos_;
+    CGPoint scrollerIndicatorPos_;
 }
 
 @property (nonatomic,retain) NSMutableArray* charIDArray;
