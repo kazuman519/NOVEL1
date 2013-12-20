@@ -39,20 +39,27 @@
 -(id) init
 {
 	if( (self=[super init])) {
-
+        // ゲームデータを読み込む
+        [[SimpleAudioEngine sharedEngine] playEffect:@"kiran.mp3"];
+        
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
-
+        
 		CCSprite *background;
 		
 		if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
-			background = [CCSprite spriteWithFile:@"Default.png"];
-			background.rotation = 0;
+            if (size.width == 568) {
+                background = [CCSprite spriteWithFile:@"Default-568h@2x.png"];
+            }
+            else{
+                background = [CCSprite spriteWithFile:@"Default.png"];
+            }
+			background.rotation = -90;
 		} else {
 			background = [CCSprite spriteWithFile:@"Default-Landscape~ipad.png"];
 		}
 		background.position = ccp(size.width/2, size.height/2);
-
+        
 		// add the label as a child to this Layer
 		[self addChild: background];
 	}

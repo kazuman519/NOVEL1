@@ -281,9 +281,16 @@ enum {
     }
 }
 
-// 画面アクション
+//--------- 画面アクション -------
+// 暗転
 -(void)blackOutAction{
-    // テスト
+    id fadeTo1 = [CCFadeTo actionWithDuration:0.15 opacity:255];
+    id delay = [CCDelayTime actionWithDuration:0.5];
+    id fadeTo2 = [CCFadeTo actionWithDuration:0.25 opacity:0];
+    [frontBg_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
+}
+// ホワイトアウト
+-(void)whitweOutAction{
     id fadeTo1 = [CCFadeTo actionWithDuration:0.15 opacity:255];
     id delay = [CCDelayTime actionWithDuration:0.5];
     id fadeTo2 = [CCFadeTo actionWithDuration:0.25 opacity:0];
@@ -303,7 +310,7 @@ enum {
         if (!isShowText_) {
             NSLog(@"NEXT");
             [self nextText];
-            
+            [self blackOutAction];
         }
         else{
             NSLog(@"SKIP");
