@@ -18,7 +18,9 @@ enum {
     OBJECT_TEXT_WINDOW,
     OBJECT_LINES_LABEL,
     OBJECT_CHAR_LABEL,
-    OBJECT_PEN
+    OBJECT_PEN,
+    OBJECT_FRONT,
+    OBJECT_MENU
 };
 
 -(id)init{
@@ -100,7 +102,7 @@ enum {
     
     CCMenu* menu = [CCMenu menuWithItems:menuBtn_, nil];
     menu.position = ccp(0, 0);
-    [self addChild:menu];
+    [self addChild:menu z:OBJECT_MENU];
     
     // テキストウィンドウ
     textWindow_ = [CCSprite spriteWithFile:@"textWindow.png"];
@@ -130,6 +132,12 @@ enum {
         [self.labelArray addObject:textLabel];
         [self addChild:textLabel z:OBJECT_LINES_LABEL tag:OBJECT_LINES_LABEL];
     }
+    
+    // フロント
+    frontBg_ = [CCSprite spriteWithFile:@"testBg.jpg"];
+    frontBg_.position = ccp(winSize_.width/2, winSize_.height/2);
+    frontBg_.opacity = 0;
+    [self addChild:frontBg_ z:OBJECT_FRONT];
 }
 // ペンのアクション
 -(void)jumpPen{
@@ -273,6 +281,15 @@ enum {
     }
 }
 
+// 画面アクション
+-(void)blackOutAction{
+    // テスト
+    id fadeTo1 = [CCFadeTo actionWithDuration:0.15 opacity:255];
+    id delay = [CCDelayTime actionWithDuration:0.5];
+    id fadeTo2 = [CCFadeTo actionWithDuration:0.25 opacity:0];
+    [frontBg_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
+}
+
 //---- タッチ処理 ----
 // タッチ開始
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
@@ -287,8 +304,6 @@ enum {
             NSLog(@"NEXT");
             [self nextText];
             
-            // テスト
-            []
         }
         else{
             NSLog(@"SKIP");
