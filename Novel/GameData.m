@@ -201,7 +201,7 @@ static GameData* _gameDataInstance = nil;
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
     //クエリ文を指定
-    NSString *select_query = [NSString stringWithFormat:@"SELECT * FROM text WHERE charID=%d AND part = %d",charID,[self getCharProgressAppointCharID:charID]];
+    NSString *select_query = [NSString stringWithFormat:@"SELECT * FROM story%d WHERE part = %d",charID,[self getCharProgressAppointCharID:charID]];
     [db beginTransaction];
     
     FMResultSet *rs = [db executeQuery:select_query];

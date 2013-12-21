@@ -20,7 +20,7 @@
     CCSprite* textWindow_;
     CCSprite* penSprite_;
     CCLabelTTF* charNameLabel_;
-    CCSprite* frontBg_;
+    CCSprite* frontGround_;
     CGPoint penPos_;
     
     // 設定関連

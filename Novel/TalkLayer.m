@@ -134,10 +134,10 @@ enum {
     }
     
     // フロント
-    frontBg_ = [CCSprite spriteWithFile:@"testBg.jpg"];
-    frontBg_.position = ccp(winSize_.width/2, winSize_.height/2);
-    frontBg_.opacity = 0;
-    [self addChild:frontBg_ z:OBJECT_FRONT];
+    frontGround_ = [CCSprite spriteWithFile:@"blackFront.jpg"];
+    frontGround_.position = ccp(winSize_.width/2, winSize_.height/2);
+    frontGround_.opacity = 0;
+    [self addChild:frontGround_ z:OBJECT_FRONT];
 }
 // ペンのアクション
 -(void)jumpPen{
@@ -151,6 +151,7 @@ enum {
     [penSprite_ stopAllActions];
 }
 
+//次のテキストを表示させる
 -(void)nextText{
     for (CCLabelTTF* label in self.labelArray){
         label.string = @"";
@@ -284,18 +285,21 @@ enum {
 //--------- 画面アクション -------
 // 暗転
 -(void)blackOutAction{
+    [frontGround_ setTexture:[[CCTextureCache sharedTextureCache] addImage: @"blackFront.jpg"]];
     id fadeTo1 = [CCFadeTo actionWithDuration:0.15 opacity:255];
     id delay = [CCDelayTime actionWithDuration:0.5];
     id fadeTo2 = [CCFadeTo actionWithDuration:0.25 opacity:0];
-    [frontBg_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
+    [frontGround_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
 }
 // ホワイトアウト
--(void)whitweOutAction{
+-(void)whiteOutAction{
+    [frontGround_ setTexture:[[CCTextureCache sharedTextureCache] addImage: @"whiteFront.jpg"]];
     id fadeTo1 = [CCFadeTo actionWithDuration:0.15 opacity:255];
     id delay = [CCDelayTime actionWithDuration:0.5];
     id fadeTo2 = [CCFadeTo actionWithDuration:0.25 opacity:0];
-    [frontBg_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
+    [frontGround_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
 }
+
 
 //---- タッチ処理 ----
 // タッチ開始
@@ -310,7 +314,6 @@ enum {
         if (!isShowText_) {
             NSLog(@"NEXT");
             [self nextText];
-            [self blackOutAction];
         }
         else{
             NSLog(@"SKIP");
