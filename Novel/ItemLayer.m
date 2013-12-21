@@ -32,6 +32,7 @@
     [CCMenuItemFont setFontName:@"Marker Felt"];
     returnBtn_ = [CCMenuItemFont itemWithString:@"もどる" block:^(id sender) {
         NSLog(@"RETURN");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];
         self.isReturn = YES;
     }];
     returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.5, returnBtn_.contentSize.height);

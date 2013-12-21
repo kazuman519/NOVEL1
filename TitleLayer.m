@@ -39,6 +39,7 @@
     [CCMenuItemFont setFontName:@"Marker Felt"];
     startBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"startBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"startBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"GAME START");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         
         // 確認アラート
         // ※データが合った場合だけ確認ができるようなしょりにする
@@ -49,18 +50,22 @@
     }];
     continuBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"continueBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"continueBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"CONTINUE");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MenuScene node]]];
     }];
     archiveBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"archiveBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"archiveBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"ARCHIVE");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[ArchiveLayer node]]];
     }];
     helpBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"helpBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"helpBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"HELP");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelpLayer node]]];
     }];
     optionBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"optionBtn%d_1.png",number]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"optionBtn%d_2.png",number]] block:^(id sender) {
         NSLog(@"OPTION");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[SystemLayer node] ]];
         
     }];
@@ -85,11 +90,13 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         case 0:
             //１番目のボタンが押されたときの処理を記述する
             NSLog(@"だめ");
+            [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];
             break;
         case 1:
             //２番目のボタンが押されたときの処理を記述する
             NSLog(@"おk");
             [gameData_ newData];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MenuScene node]]];
             break;
     }

@@ -50,26 +50,31 @@
     
     talkBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"talkBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"talkBtn2.png"] block:^(id sender) {
         NSLog(@"TALK");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         self.isShowTalk = YES;
         [self hideAction];
     }];
     itemBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"itemBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"itemBtn2.png"] block:^(id sender) {
         NSLog(@"ITEM");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         self.isShowItem = YES;
         [self hideAction];
     }];
     dataBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"dataBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"dataBtn2.png"] block:^(id sender) {
         NSLog(@"DATA");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         self.isShowData = YES;
         [self hideAction];
     }];
     shopBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"shopBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"shopBtn2.png"] block:^(id sender) {
         NSLog(@"SHOP");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         self.isShowShop = YES;
         [self hideAction];
     }];
     systemBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"systemBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"systemBtn2.png"] block:^(id sender) {
         NSLog(@"SYSTEM");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
         self.isShowSystem = YES;
         [self hideAction];
     }];

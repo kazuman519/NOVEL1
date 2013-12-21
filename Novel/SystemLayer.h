@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "SimpleAudioEngine.h"
 
 @interface SystemLayer : CCLayer {
     CGSize winSize_;

@@ -36,6 +36,7 @@
     // 戻るボタン
     returnBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"returnBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"returnBtn2.png"] block:^(id sender) {
         NSLog(@"RETURN");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];
         self.isReturn = YES;
     }];
     returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.6, winSize_.height - returnBtn_.contentSize.height);
@@ -59,7 +60,8 @@
         CGPoint selectCharPos;
         NSNumber* charID = [self.charIDArray objectAtIndex:i];
         CCMenuItemSprite* selectChar = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"selectChar%d.png",charID.intValue]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"selectChar%d.png",charID.intValue]]  block:^(id sender) {
-            NSLog(@"select:%d",charID.intValue);
+            NSLog(@"SELECT_CHAR:%d",charID.intValue);
+            [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[TalkLayer node] ]];
             
         }];

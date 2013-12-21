@@ -33,10 +33,12 @@
     [CCMenuItemFont setFontName:@"Marker Felt"];
     returnBtn_ = [CCMenuItemFont itemWithString:@"もどる" block:^(id sender) {
         NSLog(@"RETURN");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];
         self.isReturn = YES;
     }];
     returnTitleBtn_ = [CCMenuItemFont itemWithString:@"タイトルへ" block:^(id sender){
         NSLog(@"RETURN TITLE");
+        [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[TitleLayer node] ]];
     }];
     
