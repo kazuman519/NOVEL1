@@ -60,7 +60,7 @@ enum {
     nowTextLength_ = 0;
     lineDuring_ = 10;
     fontSize_ = 15.5f;
-    delayTime_ = 0.03f;
+    delayTime_ = 0.001f;
     progressTime_ = 0.0f;
     showText_ = [NSString string];
     
@@ -69,7 +69,6 @@ enum {
     
     textNum = 0;
     
-    [gameData_ setTextAppontCharID:1];
     self.textArray = gameData_.textArray;
     self.nameArray = gameData_.charNameArray;
     self.inCharArray = gameData_.inCharArray;
@@ -182,6 +181,7 @@ enum {
         NSLog(@"PART END");
         [gameData_ advanceTime];
         [gameData_ advancePartAppointCharID:1];
+        [SimpleAudioEngine sharedEngine].effectsVolume = 1;
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5 scene:[MenuScene node]]];
     }
 }
@@ -326,6 +326,8 @@ enum {
     if (CGRectContainsPoint(textWindow_.boundingBox, location)) {
         if (!isShowText_) {
             NSLog(@"NEXT");
+            [SimpleAudioEngine sharedEngine].effectsVolume = 0.3;
+            [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
             [self nextText];
         }
         else{

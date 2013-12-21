@@ -61,6 +61,7 @@
         NSNumber* charID = [self.charIDArray objectAtIndex:i];
         CCMenuItemSprite* selectChar = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"selectChar%d.png",charID.intValue]] selectedSprite:[CCSprite spriteWithFile:[NSString stringWithFormat:@"selectChar%d.png",charID.intValue]]  block:^(id sender) {
             NSLog(@"SELECT_CHAR:%d",charID.intValue);
+            [gameData_ setTextAppontCharID:0];
             [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
             [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[TalkLayer node] ]];
             

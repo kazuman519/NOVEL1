@@ -244,6 +244,7 @@
 		A4E80E2B186613C900635FC3 /* yuuhi1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E80E0E186613C900635FC3 /* yuuhi1.png */; };
 		A4E80E2C186613C900635FC3 /* yuuhi2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E80E0F186613C900635FC3 /* yuuhi2.png */; };
 		A4E80E301866180D00635FC3 /* dayImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E80E2F1866180D00635FC3 /* dayImage.png */; };
+		A4E80E3218661EE800635FC3 /* skip.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4E80E3118661EE800635FC3 /* skip.wav */; };
 		A4F0282718548002005FC449 /* bg1.JPG in Resources */ = {isa = PBXBuildFile; fileRef = A4F0282618548002005FC449 /* bg1.JPG */; };
 		A4F0283F18555E24005FC449 /* archiveBtn1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F0282918555E24005FC449 /* archiveBtn1_1.png */; };
 		A4F0284018555E24005FC449 /* archiveBtn1_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4F0282A18555E24005FC449 /* archiveBtn1_2.png */; };
@@ -683,6 +684,7 @@
 		A4E80E0E186613C900635FC3 /* yuuhi1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuuhi1.png; sourceTree = "<group>"; };
 		A4E80E0F186613C900635FC3 /* yuuhi2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuuhi2.png; sourceTree = "<group>"; };
 		A4E80E2F1866180D00635FC3 /* dayImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dayImage.png; sourceTree = "<group>"; };
+		A4E80E3118661EE800635FC3 /* skip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = skip.wav; sourceTree = "<group>"; };
 		A4F0282618548002005FC449 /* bg1.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg1.JPG; sourceTree = "<group>"; };
 		A4F0282918555E24005FC449 /* archiveBtn1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = archiveBtn1_1.png; sourceTree = "<group>"; };
 		A4F0282A18555E24005FC449 /* archiveBtn1_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = archiveBtn1_2.png; sourceTree = "<group>"; };
@@ -1335,6 +1337,7 @@
 			isa = PBXGroup;
 			children = (
 				A4E80DAB18660A7A00635FC3 /* return.wav */,
+				A4E80E3118661EE800635FC3 /* skip.wav */,
 				A4E80DAC18660A7A00635FC3 /* tap.wav */,
 			);
 			name = Touch;
@@ -1536,6 +1539,7 @@
 				A4F0284218555E24005FC449 /* archiveBtn2_2.png in Resources */,
 				A4F0286718558006005FC449 /* selectChar4.png in Resources */,
 				A4F0284418555E24005FC449 /* continueBtn1_2.png in Resources */,
+				A4E80E3218661EE800635FC3 /* skip.wav in Resources */,
 				A4E80DF01866137B00635FC3 /* da_zaku.png in Resources */,
 				A4C643D91815362000E9DD3A /* Icon-Small-50.png in Resources */,
 				A4E80DA2186609BA00635FC3 /* se16.wav in Resources */,
