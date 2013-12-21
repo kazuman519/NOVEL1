@@ -44,6 +44,7 @@
 @property (nonatomic,retain)NSMutableArray* nameArray;
 @property (nonatomic,retain)NSMutableArray* inCharArray;
 @property (nonatomic,retain)NSMutableArray* outCharArray;
+@property (nonatomic,retain)NSMutableArray* winEffeArray;
 @property (nonatomic,retain)NSMutableArray* labelArray;
 @property (nonatomic,retain)NSMutableArray* charArray;
 @property (nonatomic,retain)NSMutableArray* charIDArray;

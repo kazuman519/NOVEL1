@@ -15,11 +15,11 @@ enum {
     OBJECT_NULL,
     OBJECT_BACKGROUND,
     OBJECT_CHARACTER,
+    OBJECT_FRONT,
     OBJECT_TEXT_WINDOW,
     OBJECT_LINES_LABEL,
     OBJECT_CHAR_LABEL,
     OBJECT_PEN,
-    OBJECT_FRONT,
     OBJECT_MENU,
     OBJECT_SIDE_BAR
 };
@@ -60,7 +60,7 @@ enum {
     nowTextLength_ = 0;
     lineDuring_ = 10;
     fontSize_ = 15.5f;
-    delayTime_ = 0.001f;
+    delayTime_ = 1/100;
     progressTime_ = 0.0f;
     showText_ = [NSString string];
     
@@ -73,6 +73,7 @@ enum {
     self.nameArray = gameData_.charNameArray;
     self.inCharArray = gameData_.inCharArray;
     self.outCharArray = gameData_.outCharArray;
+    self.winEffeArray = gameData_.winEfeArray;
     self.labelArray = [NSMutableArray array];
     self.charArray = [NSMutableArray array];
     self.charIDArray = [NSMutableArray array];
@@ -195,12 +196,17 @@ enum {
     // 演出があるかのチェック
     NSNumber* inChar = [self.inCharArray objectAtIndex:textNum];
     NSNumber* outChar = [self.outCharArray objectAtIndex:textNum];
+    NSNumber* winEffe = [self.winEffeArray objectAtIndex:textNum];
     if (inChar.floatValue != 0.0f) {
         [self inCharAction:inChar.floatValue];
     }
     if (outChar.floatValue != 0.0f) {
         [self outCharAction:outChar.floatValue];
     }
+    if (winEffe.integerValue != 0) {
+        [self blackOutAction];
+    }
+    NSLog(@"wiin%@",winEffe);
     
     isShowText_ = YES;
     [self schedule:@selector(textUp:)];
@@ -300,7 +306,7 @@ enum {
 -(void)blackOutAction{
     [frontGround_ setTexture:[[CCTextureCache sharedTextureCache] addImage: @"blackFront.jpg"]];
     id fadeTo1 = [CCFadeTo actionWithDuration:0.15 opacity:255];
-    id delay = [CCDelayTime actionWithDuration:0.5];
+    id delay = [CCDelayTime actionWithDuration:0.2];
     id fadeTo2 = [CCFadeTo actionWithDuration:0.25 opacity:0];
     [frontGround_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
 }
@@ -308,7 +314,7 @@ enum {
 -(void)whiteOutAction{
     [frontGround_ setTexture:[[CCTextureCache sharedTextureCache] addImage: @"whiteFront.jpg"]];
     id fadeTo1 = [CCFadeTo actionWithDuration:0.15 opacity:255];
-    id delay = [CCDelayTime actionWithDuration:0.5];
+    id delay = [CCDelayTime actionWithDuration:0.2];
     id fadeTo2 = [CCFadeTo actionWithDuration:0.25 opacity:0];
     [frontGround_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
 }

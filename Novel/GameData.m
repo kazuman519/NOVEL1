@@ -220,9 +220,9 @@ static GameData* _gameDataInstance = nil;
         [self.charNameArray addObject:name];
         [self.inCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"inChar"]]];
         [self.outCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"outChar"]]];
-        [self.changeBgArray addObject:[rs stringForColumn:@"text"]];
-        [self.winEfeArray addObject:[rs stringForColumn:@"text"]];
-        [self.charGraArray addObject:[rs stringForColumn:@"text"]];
+        [self.changeBgArray addObject:[NSNumber numberWithInteger:[rs intForColumn:@"changeBg"]]];
+        [self.winEfeArray addObject:[NSNumber numberWithInteger:[rs intForColumn:@"winEfe"]]];
+        [self.charGraArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"charGra"]]];
     }
     //Databaseを閉じる
     [db close];
