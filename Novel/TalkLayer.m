@@ -20,7 +20,8 @@ enum {
     OBJECT_CHAR_LABEL,
     OBJECT_PEN,
     OBJECT_FRONT,
-    OBJECT_MENU
+    OBJECT_MENU,
+    OBJECT_SIDE_BAR
 };
 
 -(id)init{
@@ -88,6 +89,18 @@ enum {
 
 // レイアウト初期化
 -(void)initLayout{
+    // サイドバーの設定
+    if (winSize_.width == 568) {
+        CCSprite* leftBar = [CCSprite spriteWithFile:@"sideBar.png"];
+        CCSprite* rightBar = [CCSprite spriteWithFile:@"sideBar.png"];
+        leftBar.anchorPoint = ccp(0.0, 0);
+        rightBar.anchorPoint = ccp(1.0, 0);
+        leftBar.position = ccp(0, 0);
+        rightBar.position = ccp(winSize_.width, 0);
+        [self addChild:leftBar z:OBJECT_SIDE_BAR];
+        [self addChild:rightBar z:OBJECT_SIDE_BAR];
+    }
+    
     // 背景
     bgSprite_ = [CCSprite spriteWithFile:@"bg1.JPG"];
     bgSprite_.position = ccp(winSize_.width/2, winSize_.height/2);
