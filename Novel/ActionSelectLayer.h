@@ -16,15 +16,19 @@
     CGPoint zeroPos_;
     GameData *gameData_;
     
-    CCLabelTTF* dayLabel_;
     CCSprite* bgSprite_;
     CCSprite* timeSprite_;
+    CCSprite* daySprite_;
+    CCLabelTTF* monthLabel_;
+    CCLabelTTF* dayLabel_;
     CCMenuItemSprite* talkBtn_;
     CCMenuItemSprite* itemBtn_;
     CCMenuItemSprite* dataBtn_;
     CCMenuItemSprite* shopBtn_;
     CCMenuItemSprite* systemBtn_;
     
+    CGPoint daySpritePos_;
+    CGPoint monthLabelPos_;
     CGPoint dayLabelPos_;
     CGPoint talkBtnPos_;
     CGPoint itemBtnPos_;
