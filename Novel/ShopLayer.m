@@ -30,12 +30,13 @@
     
     [CCMenuItemFont setFontSize:18];
     [CCMenuItemFont setFontName:@"Marker Felt"];
-    returnBtn_ = [CCMenuItemFont itemWithString:@"もどる" block:^(id sender) {
+    // 戻るボタン
+    returnBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"returnBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"returnBtn2.png"] block:^(id sender) {
         NSLog(@"RETURN");
         [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];
         self.isReturn = YES;
     }];
-    returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.5, returnBtn_.contentSize.height);
+    returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.6, winSize_.height - returnBtn_.contentSize.height);
     
     CCMenu* menu = [CCMenu menuWithItems:returnBtn_, nil];
     menu.position = ccp(0, 0);
@@ -48,7 +49,7 @@
     
 }
 -(void)hideAction{
-    [self moveDownNode:returnBtn_];
+    [self moveUpNode:returnBtn_];
     [self moveUpNode:titleLabel_];
     
 }

@@ -60,7 +60,7 @@ enum{
 }
 
 -(void)onEnterTransitionDidFinish{
-    //[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"bgm2.wav"];
+    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"bgm2.wav"];
     [super onEnterTransitionDidFinish];
 }
 

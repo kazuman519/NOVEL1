@@ -23,9 +23,9 @@
 @property (nonatomic, retain) NSMutableArray *outCharArray;
 @property (nonatomic, retain) NSMutableArray *changeBgArray;
 @property (nonatomic, retain) NSMutableArray *winEfeArray;
+@property (nonatomic, retain) NSMutableArray *seArray;
 @property (nonatomic, retain) NSMutableArray *charGraArray;
-
-
+@property (nonatomic, retain) NSMutableArray *charEfeArray;
 
 +(GameData*)getInstance;
 

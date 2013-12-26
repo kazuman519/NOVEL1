@@ -31,11 +31,13 @@
     
     [CCMenuItemFont setFontSize:18];
     [CCMenuItemFont setFontName:@"Marker Felt"];
-    returnBtn_ = [CCMenuItemFont itemWithString:@"もどる" block:^(id sender) {
+    // 戻るボタン
+    returnBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"returnBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"returnBtn2.png"] block:^(id sender) {
         NSLog(@"RETURN");
         [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];
         self.isReturn = YES;
     }];
+    returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.6, winSize_.height - returnBtn_.contentSize.height);
     returnTitleBtn_ = [CCMenuItemFont itemWithString:@"タイトルへ" block:^(id sender){
         NSLog(@"RETURN TITLE");
         [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];

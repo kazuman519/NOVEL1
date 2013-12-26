@@ -23,19 +23,20 @@
 }
 
 -(void)initLayout{
-    titleLabel_ = [CCLabelTTF labelWithString:@"アイテム" fontName:@"Marker Felt" fontSize:24];
-    titleLabel_.anchorPoint = ccp(0, 1.0);
-    titleLabel_.position = titleLabelPos_ = ccp(winSize_.width/2 - winSize_.height*0.6, winSize_.height - winSize_.height*0.05);
-    [self addChild:titleLabel_];
+    titleSprite_ = [CCSprite spriteWithFile:@"it_mi.png"];
+    titleSprite_.anchorPoint = ccp(0, 1.0);
+    titleSprite_.position = titleSpritePos_ = ccp(0, winSize_.height - winSize_.height*0.05);
+    [self addChild:titleSprite_];
     
     [CCMenuItemFont setFontSize:18];
     [CCMenuItemFont setFontName:@"Marker Felt"];
-    returnBtn_ = [CCMenuItemFont itemWithString:@"もどる" block:^(id sender) {
+    // 戻るボタン
+    returnBtn_ = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithFile:@"returnBtn1.png"] selectedSprite:[CCSprite spriteWithFile:@"returnBtn2.png"] block:^(id sender) {
         NSLog(@"RETURN");
         [[SimpleAudioEngine sharedEngine] playEffect:@"return.wav"];
         self.isReturn = YES;
     }];
-    returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.5, returnBtn_.contentSize.height);
+    returnBtn_.position = returnBtnPos_ = ccp(winSize_.width/2 + winSize_.height*0.6, winSize_.height - returnBtn_.contentSize.height);
     
     CCMenu* menu = [CCMenu menuWithItems:returnBtn_, nil];
     menu.position = ccp(0, 0);
@@ -43,13 +44,13 @@
 }
 
 -(void)showAction{
-    [self movePosNode:titleLabel_ position:titleLabelPos_];
+    [self movePosNode:titleSprite_ position:titleSpritePos_];
     [self movePosNode:returnBtn_ position:returnBtnPos_];
     
 }
 -(void)hideAction{
-    [self moveDownNode:returnBtn_];
-    [self moveUpNode:titleLabel_];
+    [self moveUpNode:returnBtn_];
+    [self moveUpNode:titleSprite_];
     
 }
 -(void)movePosNode:(CCNode*)node position:(CGPoint)positon{

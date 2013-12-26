@@ -32,7 +32,9 @@ static GameData* _gameDataInstance = nil;
         self.outCharArray= [NSMutableArray array];
         self.changeBgArray = [NSMutableArray array];
         self.winEfeArray = [NSMutableArray array];
+        self.seArray = [NSMutableArray array];
         self.charGraArray = [NSMutableArray array];
+        self.charEfeArray = [NSMutableArray array];
         
         //データベースの選択
         databaseName_ = @"novelDB.sqlite";
@@ -196,7 +198,9 @@ static GameData* _gameDataInstance = nil;
     [self.outCharArray removeAllObjects];
     [self.changeBgArray removeAllObjects];
     [self.winEfeArray removeAllObjects];
+    [self.seArray removeAllObjects];
     [self.charGraArray removeAllObjects];
+    [self.charEfeArray removeAllObjects];
     
     FMDatabase *db = [FMDatabase databaseWithPath:self.databasePath];
     [db open];
@@ -222,7 +226,9 @@ static GameData* _gameDataInstance = nil;
         [self.outCharArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"outChar"]]];
         [self.changeBgArray addObject:[NSNumber numberWithInteger:[rs intForColumn:@"changeBg"]]];
         [self.winEfeArray addObject:[NSNumber numberWithInteger:[rs intForColumn:@"winEfe"]]];
+        [self.seArray addObject:[NSNumber numberWithInteger:[rs intForColumn:@"SE"]]];
         [self.charGraArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"charGra"]]];
+        [self.charEfeArray addObject:[NSNumber numberWithFloat:[rs doubleForColumn:@"charEffect"]]];
     }
     //Databaseを閉じる
     [db close];

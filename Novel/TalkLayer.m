@@ -74,6 +74,8 @@ enum {
     self.inCharArray = gameData_.inCharArray;
     self.outCharArray = gameData_.outCharArray;
     self.winEffeArray = gameData_.winEfeArray;
+    self.charEffeArray = gameData_.charEfeArray;
+    self.seArray = gameData_.seArray;
     self.labelArray = [NSMutableArray array];
     self.charArray = [NSMutableArray array];
     self.charIDArray = [NSMutableArray array];
@@ -197,6 +199,9 @@ enum {
     NSNumber* inChar = [self.inCharArray objectAtIndex:textNum];
     NSNumber* outChar = [self.outCharArray objectAtIndex:textNum];
     NSNumber* winEffe = [self.winEffeArray objectAtIndex:textNum];
+    NSNumber* se = [self.seArray objectAtIndex:textNum];
+    NSNumber* charEffe = [self.charEffeArray objectAtIndex:textNum];
+    
     if (inChar.floatValue != 0.0f) {
         [self inCharAction:inChar.floatValue];
     }
@@ -204,9 +209,40 @@ enum {
         [self outCharAction:outChar.floatValue];
     }
     if (winEffe.integerValue != 0) {
-        [self blackOutAction];
+        if (winEffe.integerValue == 4) {
+            [self blackOutAction];
+        }
+        else if (winEffe.integerValue == 2){
+            [self whiteOutAction];
+        }
+        else if (winEffe.integerValue == 3){
+            [self whiteOutAction];
+        }
     }
-    NSLog(@"wiin%@",winEffe);
+    if (se.integerValue != 0) {
+        [SimpleAudioEngine sharedEngine].effectsVolume = 1.0;
+        if (se.integerValue == 1) {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"se1"];
+        }
+        if (se.integerValue == 2) {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"se2"];
+        }
+        if (se.integerValue == 3) {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"se3"];
+        }
+        if (se.integerValue == 4) {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"se4"];
+        }
+        if (se.integerValue == 5) {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"se5"];
+        }
+        if (se.integerValue == 6) {
+            [[SimpleAudioEngine sharedEngine] playEffect:@"se6"];
+        }
+    }
+    if (charEffe.floatValue != 0.0f) {
+        [self charEffeAction:charEffe.floatValue];
+    }
     
     isShowText_ = YES;
     [self schedule:@selector(textUp:)];
@@ -319,6 +355,29 @@ enum {
     [frontGround_ runAction:[CCSequence actions:fadeTo1, delay, fadeTo2, nil]];
 }
 
+// キャラクターのエフェクトアクション
+-(void)charEffeAction:(float)num{
+    int charID = num;
+    int charEffe = (int)(num * 10) % 10;
+    CCSprite* charSprite;
+    
+    int i = 0;
+    for (NSNumber* charIDNum in self.charIDArray){
+        if (charIDNum.intValue == charID) {
+            charSprite = [self.charArray objectAtIndex:i];
+            
+            if (charEffe == 8) {
+                id jumpBy1 = [CCJumpBy actionWithDuration:0.1 position:ccp(0, 0) height:20 jumps:1];
+                [charSprite runAction:jumpBy1];
+            }
+            else if (charEffe == 9) {
+                id jumpBy2 = [CCJumpBy actionWithDuration:0.2 position:ccp(0, 0) height:20 jumps:2];
+                [charSprite runAction:jumpBy2];
+            }
+        }
+        i++;
+    }
+}
 
 //---- タッチ処理 ----
 // タッチ開始
@@ -332,7 +391,7 @@ enum {
     if (CGRectContainsPoint(textWindow_.boundingBox, location)) {
         if (!isShowText_) {
             NSLog(@"NEXT");
-            [SimpleAudioEngine sharedEngine].effectsVolume = 0.3;
+            [SimpleAudioEngine sharedEngine].effectsVolume = 0.1;
             [[SimpleAudioEngine sharedEngine] playEffect:@"tap.wav"];
             [self nextText];
         }

@@ -13,10 +13,10 @@
 @interface DataLayer : CCLayer {
     CGSize winSize_;
     
-    CCLabelTTF* titleLabel_;
+    CCLabelTTF* titleSprite_;
     CCMenuItemFont* returnBtn_;
     
-    CGPoint titleLabelPos_;
+    CGPoint titleSpritelPos_;
     CGPoint returnBtnPos_;
 }
 
